@@ -1,0 +1,27 @@
+
+def knapsack(w, p, capacity):
+    n = len(w)
+    items = sorted(zip(w, p), key=lambda x: x[1]/x[0], reverse=True)
+    profit = 0
+
+    for wt, pr in items:
+        if capacity >= wt:
+            capacity -= wt
+            profit += pr
+        else:
+            profit += pr * (capacity / wt)
+            break
+
+    return profit
+
+n = int(input("Enter number of parcels: "))
+w = []
+p = []
+
+for i in range(n):
+    w.append(float(input("Enter weight: ")))
+    p.append(float(input("Enter profit: ")))
+
+capacity = float(input("Enter truck capacity: "))
+
+print("Maximum Profit:", knapsack(w, p, capacity))
